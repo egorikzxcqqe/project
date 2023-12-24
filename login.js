@@ -28,7 +28,20 @@ reg.addEventListener('click', () => {
 // end reg button
 
 // start vhod
-
+vhod.addEventListener('click', () => {
+    var email_vhod = document.querySelector('.email_vhod').value
+    var password_vhod = document.querySelector('.password_vhod').value
+    db.transaction(function (tx) {
+        var fun = tx.executeSql(`SELECT * FROM test WHERE email=${email_vhod} AND password=${password_vhod}`)
+        var fun1 = tx.executeSql(`SELECT name FROM test WHERE email=${email_vhod} AND password=${password_vhod}`)
+        if (fun) {
+            alert(`Добро пожаловать ${fun1}`)
+        }
+        else {
+            alert('Хм такого пользователя нет попробуй пройти регистрацию!')
+        }
+    })
+})
 
 registerBtn.addEventListener('click', () => {
     container.classList.add('active')
