@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="icoptpit.ico" type="image/x-icon">
+    <title>Track page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section class="container">
+      <header>Заполнение информации</header>
+      <form action="#" class="form">
+        <div class="input-box">
+          <label>ФИО</label>
+          <input type="text" placeholder="Иванов Иван Иванович" required />
+        </div>
+
+        <div class="input-box">
+          <label>Группа</label>
+          <input type="text" placeholder="22ИСП1" required />
+        </div>
+
+        <div class="column">
+          <div class="input-box">
+            <label>Курс</label>
+            <input type="number" placeholder="2" required />
+          </div>
+          <div class="input-box">
+            <label>Дата рождения</label>
+            <input type="date" placeholder="Выберите дату рождения" required />
+          </div>
+        </div>
+        <div class="gender-box">
+          <h3>Пол</h3>
+          <div class="gender-option">
+            <div class="gender">
+              <input type="radio" id="check-male" name="gender" checked />
+              <label for="check-male">Мужской</label>
+            </div>
+            <div class="gender">
+              <input type="radio" id="check-female" name="gender" />
+              <label for="check-female">Женский</label>
+            </div>
+          </div>
+        </div>
+        <div class="input-box age">
+          <label>Возраст</label>
+          <input type="text" placeholder="18" required />
+          <div class="column">
+            <div class="select-box">
+              <select>
+                <option hidden>Любимая соц.сеть/мессенджер</option>
+                <option>Telegram</option>
+                <option>VKontakte</option>
+                <option>Viber</option>
+                <option>Instagram</option>
+              </select>
+            </div>
+            <!-- контактные данные указывать в зависимости от выбранной соц сети/месса -->
+            <input type="text" placeholder="Контактные данные" required /> 
+          </div>
+        </div>
+        <button>Готово</button>
+      </form>
+    </section>
+  </body>
+</html>
