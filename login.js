@@ -23,6 +23,13 @@ reg.addEventListener('click', () => {
     db.transaction(function (tx) {
         tx.executeSql('INSERT INTO test (name, email, password) VALUES (?, ?, ?)', [name, email_reg, password_reg])
     })
+
+    if ((name == null || name == "") && (email_reg == null || email_reg == "") && (password_reg == null || password_reg == "") || (email_reg == null || email_reg == "") && (password_reg == null || password_reg == "") || (name == null || name == "") && (password_reg == null || password_reg == "") || (name == null || name == "") && (email_reg == null || email_reg == "")) {
+        alert('Нужно обязательно указать все поля!')
+    }
+    else {
+        alert('Вы успешно прошли регистрацию!')
+    }
 })
 
 // end reg button
@@ -32,14 +39,14 @@ vhod.addEventListener('click', () => {
     var email_vhod = document.querySelector('.email_vhod').value
     var password_vhod = document.querySelector('.password_vhod').value
     db.transaction(function (tx) {
-        var fun = tx.executeSql(`SELECT * FROM test WHERE email=${email_vhod} AND password=${password_vhod}`)
-        var fun1 = tx.executeSql(`SELECT name FROM test WHERE email=${email_vhod} AND password=${password_vhod}`)
-        if (fun) {
-            alert(`Добро пожаловать ${fun1}`)
-        }
-        else {
-            alert('Хм такого пользователя нет попробуй пройти регистрацию!')
-        }
+        tx.executeSql('SELECT name FROM test WHERE email = ? AND password = ?', [email_vhod, password_vhod], function (tx, results) {
+            var len = results.rows.length
+            for (var i = 0; i < len; i++) {
+                var row = results.rows.item(i)
+                console.log(row.name)
+                alert(row.name)
+            }
+        }, null)
     })
 })
 
@@ -50,6 +57,3 @@ registerBtn.addEventListener('click', () => {
 loginBtn.addEventListener('click', () => {
     container.classList.remove('active')
 })
-
-
-

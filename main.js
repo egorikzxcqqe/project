@@ -1,34 +1,49 @@
-var name_SQL = 'data'
-var ver_SQL = 1.0
-var op_SQL = 'save data of form'
-var count_SQL = 2*1024*1024
-var but = document.querySelector('.button')
+var request = indexedDB.open('data', 1.0);
 
-var db = openDatabase(name_SQL, ver_SQL, op_SQL, count_SQL);
-db.transaction(function (tx) {
-    tx.executeSql('CREATE TABLE IF NOT EXISTS database (fio, group, course, birth, gender, age, network, data)')
-})
+request.onupgradeneeded = function (event) {
+    var db = event.target.result;
+    var objectStore = db.createObjectStore("database", { keyPath: "id", autoIncrement: true });
+    objectStore.createIndex("fio", "fio", { unique: false });
+    // Добавьте больше индексов по мере необходимости для других полей
+};
 
-but.addEventListener('click', () => {
-    var fio = document.querySelector('.fio').value
-    var group = document.querySelector('.group').value
-    var number = document.querySelector('.number').value
-    var birth = document.querySelector('.birth').value
-    var gender = document.querySelector('.messageCheckbox').checked
-    var age = document.querySelector('.age').value
-    var form = document.querySelector('.egor').value
-    var data = document.querySelector('.data').value
+request.onsuccess = function (event) {
+    var db = event.target.result;
 
-    if (gender == true) {
-        gender = 'Мужской'
-    }
-    else {
-        gender = "Женский"
-    }
+    var but = document.querySelector('.button');
+    but.addEventListener('click', () => {
+        var transaction = db.transaction(["database"], "readwrite");
+        var objectStore = transaction.objectStore("database");
 
-    db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO database (fio, group, course, birth, gender, age, network, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [fio, group, number, birth, gender, age, form, data])
-    })
-    
-})
+        var fio = document.querySelector('.fio').value;
+        var group = document.querySelector('.group').value;
+        var number = document.querySelector('.number').value;
+        var birth = document.querySelector('.birth').value;
+        var gender = document.querySelector('.messageCheckbox').checked ? 'Мужской' : 'Женский';
+        var bobage = document.querySelector('.bobage').value;
+        console.log('age: ', bobage)
+        var form = document.querySelector('.egor').value;
+        var data = document.querySelector('.data').value;
 
+        var request = objectStore.add({
+            fio: fio,
+            group: group,
+            course: number,
+            birth: birth,
+            gender: gender,
+            bobage: bobage,
+            network: form,
+            data: data
+        });
+
+        request.onsuccess = function (event) {
+            // Данные успешно добавлены
+            console.log('Data added successfully');
+        };
+
+        request.onerror = function (event) {
+            // Обработка ошибок
+            console.error('Error adding data');
+        };
+    });
+};

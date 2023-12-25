@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Montserrat:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@100&family=Noto+Sans+Kawi&display=swap');ъ
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Montserrat:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@100&family=Noto+Sans+Kawi&display=swap');
 
 * {
   margin: 0;
@@ -44,7 +44,7 @@ body {
 .form :where(.input-box input, .select-box) {
   position: relative;
   height: 50px;
-  width: 100%;
+  width: 95%;
   outline: none;
   font-size: 1rem;
   color: #707070;
@@ -87,7 +87,7 @@ body {
 .gender label {
   color: #707070;
 }
-.age :where(input, .select-box) {
+.bobage :where(input, .select-box) {
   margin-top: 15px;
 }
 .select-box select {
@@ -122,4 +122,8 @@ body {
   .form :where(.gender-option, .gender) {
     row-gap: 15px;
   }
+}
+
+.number, .birth{
+  width: 90%;
 }
