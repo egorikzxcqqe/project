@@ -21,15 +21,14 @@ reg.addEventListener('click', () => {
     var email_reg = document.querySelector('.email_reg').value
     var password_reg = document.querySelector('.password_reg').value
     db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO test (name, email, password) VALUES (?, ?, ?)', [name, email_reg, password_reg])
+        if ((name == null || name == "") && (email_reg == null || email_reg == "") && (password_reg == null || password_reg == "") || (email_reg == null || email_reg == "") && (password_reg == null || password_reg == "") || (name == null || name == "") && (password_reg == null || password_reg == "") || (name == null || name == "") && (email_reg == null || email_reg == "")) {
+            alert('Нужно обязательно указать все поля!')
+        }
+        else {
+            tx.executeSql('INSERT INTO test (name, email, password) VALUES (?, ?, ?)', [name, email_reg, password_reg])
+            alert('Вы успешно прошли регистрацию!')
+        }
     })
-
-    if ((name == null || name == "") && (email_reg == null || email_reg == "") && (password_reg == null || password_reg == "") || (email_reg == null || email_reg == "") && (password_reg == null || password_reg == "") || (name == null || name == "") && (password_reg == null || password_reg == "") || (name == null || name == "") && (email_reg == null || email_reg == "")) {
-        alert('Нужно обязательно указать все поля!')
-    }
-    else {
-        alert('Вы успешно прошли регистрацию!')
-    }
 })
 
 // end reg button
@@ -43,8 +42,14 @@ vhod.addEventListener('click', () => {
             var len = results.rows.length
             for (var i = 0; i < len; i++) {
                 var row = results.rows.item(i)
-                console.log(row.name)
-                alert(row.name)
+                if ((email_vhod == null || email_vhod == "") && (password_vhod == null || password_vhod == "")) {
+                    alert("Вы что-то забыли!")
+                    break
+                }
+                else {
+                    alert(`Добро пожаловать ${row.name}`)
+                    window.location = 'index.html'
+                }
             }
         }, null)
     })
