@@ -44,7 +44,7 @@ body {
 .form :where(.input-box input, .select-box) {
   position: relative;
   height: 50px;
-  width: 95%;
+  width: 100%;
   outline: none;
   font-size: 1rem;
   color: #707070;
@@ -125,7 +125,7 @@ body {
 }
 
 .number, .birth{
-  width: 90%;
+  width: 100%;
 }
 
 
